@@ -1,0 +1,504 @@
+
+[2026-04-02 04:33:02] ===== Debug Info =====
+Raw response content:
+
+
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    },
+    {
+      "action": "add",
+      "target": {
+        "code": "",
+        "before_context": "        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n
+
+Extracted JSON content:
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    }
+
+JSON Parse Error:
+Expecting ',' delimiter: line 11 column 6 (char 2042)
+Error position: line 11, column 6
+Error context:
+    }\n        \n        return differences"
+    }>>>HERE>>>
+===== End Debug Info =====
+
+[2026-04-02 04:44:47] ===== Debug Info =====
+Raw response content:
+
+
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    },
+    {
+      "action": "add",
+      "target": {
+        "code": "",
+        "before_context": "        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n
+
+Extracted JSON content:
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    }
+
+JSON Parse Error:
+Expecting ',' delimiter: line 11 column 6 (char 2042)
+Error position: line 11, column 6
+Error context:
+    }\n        \n        return differences"
+    }>>>HERE>>>
+===== End Debug Info =====
+
+[2026-04-02 04:48:06] ===== Debug Info =====
+Raw response content:
+
+
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    },
+    {
+      "action": "add",
+      "target": {
+        "code": "",
+        "before_context": "        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n
+
+Extracted JSON content:
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    }
+
+JSON Parse Error:
+Expecting ',' delimiter: line 11 column 6 (char 2042)
+Error position: line 11, column 6
+Error context:
+    }\n        \n        return differences"
+    }>>>HERE>>>
+===== End Debug Info =====
+
+[2026-04-02 04:54:26] ===== Debug Info =====
+Raw response content:
+
+
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    },
+    {
+      "action": "add",
+      "target": {
+        "code": "",
+        "before_context": "        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n
+
+Extracted JSON content:
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    }
+
+JSON Parse Error:
+Expecting ',' delimiter: line 11 column 6 (char 2042)
+Error position: line 11, column 6
+Error context:
+    }\n        \n        return differences"
+    }>>>HERE>>>
+===== End Debug Info =====
+
+[2026-04-02 04:58:04] ===== Debug Info =====
+Raw response content:
+
+
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    },
+    {
+      "action": "add",
+      "target": {
+        "code": "",
+        "before_context": "        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n
+
+Extracted JSON content:
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    }
+
+JSON Parse Error:
+Expecting ',' delimiter: line 11 column 6 (char 2042)
+Error position: line 11, column 6
+Error context:
+    }\n        \n        return differences"
+    }>>>HERE>>>
+===== End Debug Info =====
+
+[2026-04-02 05:04:14] ===== Debug Info =====
+Raw response content:
+
+
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    },
+    {
+      "action": "add",
+      "target": {
+        "code": "",
+        "before_context": "        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n
+
+Extracted JSON content:
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    }
+
+JSON Parse Error:
+Expecting ',' delimiter: line 11 column 6 (char 2042)
+Error position: line 11, column 6
+Error context:
+    }\n        \n        return differences"
+    }>>>HERE>>>
+===== End Debug Info =====
+
+[2026-04-02 05:07:54] ===== Debug Info =====
+Raw response content:
+
+
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    },
+    {
+      "action": "add",
+      "target": {
+        "code": "",
+        "before_context": "        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n
+
+Extracted JSON content:
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    }
+
+JSON Parse Error:
+Expecting ',' delimiter: line 11 column 6 (char 2042)
+Error position: line 11, column 6
+Error context:
+    }\n        \n        return differences"
+    }>>>HERE>>>
+===== End Debug Info =====
+
+[2026-04-02 05:14:00] ===== Debug Info =====
+Raw response content:
+
+
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    },
+    {
+      "action": "add",
+      "target": {
+        "code": "",
+        "before_context": "        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n
+
+Extracted JSON content:
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    }
+
+JSON Parse Error:
+Expecting ',' delimiter: line 11 column 6 (char 2042)
+Error position: line 11, column 6
+Error context:
+    }\n        \n        return differences"
+    }>>>HERE>>>
+===== End Debug Info =====
+
+[2026-04-02 05:17:41] ===== Debug Info =====
+Raw response content:
+
+
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    },
+    {
+      "action": "add",
+      "target": {
+        "code": "",
+        "before_context": "        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n
+
+Extracted JSON content:
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    }
+
+JSON Parse Error:
+Expecting ',' delimiter: line 11 column 6 (char 2042)
+Error position: line 11, column 6
+Error context:
+    }\n        \n        return differences"
+    }>>>HERE>>>
+===== End Debug Info =====
+
+[2026-04-02 06:10:34] ===== Debug Info =====
+Raw response content:
+
+
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    },
+    {
+      "action": "add",
+      "target": {
+        "code": "",
+        "before_context": "        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n
+
+Extracted JSON content:
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    }
+
+JSON Parse Error:
+Expecting ',' delimiter: line 11 column 6 (char 2042)
+Error position: line 11, column 6
+Error context:
+    }\n        \n        return differences"
+    }>>>HERE>>>
+===== End Debug Info =====
+
+[2026-04-02 06:17:10] ===== Debug Info =====
+Raw response content:
+
+
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    },
+    {
+      "action": "add",
+      "target": {
+        "code": "",
+        "before_context": "        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n
+
+Extracted JSON content:
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    }
+
+JSON Parse Error:
+Expecting ',' delimiter: line 11 column 6 (char 2042)
+Error position: line 11, column 6
+Error context:
+    }\n        \n        return differences"
+    }>>>HERE>>>
+===== End Debug Info =====
+
+[2026-04-02 06:23:50] ===== Debug Info =====
+Raw response content:
+
+
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    },
+    {
+      "action": "add",
+      "target": {
+        "code": "",
+        "before_context": "        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n
+
+Extracted JSON content:
+{
+  "strategies": [
+    {
+      "action": "replace",
+      "target": {
+        "code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project",
+        "before_context": "    def get_version(self, project_id: str, version_number: int) -> Optional[VideoVersion]:\n        \"\"\"Get a specific version\"\"\"\n        versions = self.get_versions(project_id)\n        for version in versions:\n            if version.version_number == version_number:\n                return version\n        return None",
+        "after_context": ""
+      },
+      "new_code": "    def compare_versions(self, project_id: str, \n                        version1: int, version2: int) -> Dict:\n        \"\"\"Compare two versions and return differences\"\"\"\n        v1 = self.get_version(project_id, version1)\n        v2 = self.get_version(project_id, version2)\n        \n        if not v1 or not v2:\n            return {'error': 'One or both versions not found'}\n        \n        differences = {\n            'version1': version1,\n            'version2': version2,\n            'title_changed': v1.video_state.get('title') != v2.video_state.get('title'),\n            'description_changed': v1.video_state.get('description') != v2.video_state.get('description'),\n            'playback_speed_changed': v1.video_state.get('playback_speed') != v2.video_state.get('playback_speed'),\n            'subtitle_count_v1': len(v1.video_state.get('subtitles', [])),\n            'subtitle_count_v2': len(v2.video_state.get('subtitles', [])),\n            'subtitles_changed': v1.video_state.get('subtitles') != v2.video_state.get('subtitles'),\n            'created_at_v1': v1.created_at.isoformat(),\n            'created_at_v2': v2.created_at.isoformat(),\n            'created_by_v1': v1.created_by,\n            'created_by_v2': v2.created_by\n        }\n        \n        return differences"
+    }
+
+JSON Parse Error:
+Expecting ',' delimiter: line 11 column 6 (char 2042)
+Error position: line 11, column 6
+Error context:
+    }\n        \n        return differences"
+    }>>>HERE>>>
+===== End Debug Info =====

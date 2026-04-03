@@ -1,0 +1,18 @@
+{
+  "runs": [
+    {
+      "model_id": "Qwen/Qwen3.5-0.8B",
+      "scenario": "research",
+      "orchestration": "graph",
+      "run_directory": "logs/benchmark_20260402_091019_647958",
+      "results": [
+        {
+          "task_id": "research_1",
+          "status": "unknown_execution_error",
+          "passed": null,
+          "eval": null
+        }
+      ]
+    }
+  ]
+}
