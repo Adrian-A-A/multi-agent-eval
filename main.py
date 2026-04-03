@@ -34,7 +34,13 @@ def _build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--task-limit", type=int, default=1, help="Maximum tasks per scenario.")
     parser.add_argument("--base-port", type=int, default=8000, help="Base port for vLLM instances.")
-    parser.add_argument("--max-model-len", type=int, default=262144, help="Maximum model context length.")
+    parser.add_argument("--max-model-len", type=int, default=32768, help="Maximum model context length.")
+    parser.add_argument(
+        "--gpu-memory-utilization",
+        type=float,
+        default=0.95,
+        help="Fraction of GPU memory vLLM can use.",
+    )
     parser.add_argument("--reasoning-parser", type=str, default="qwen3", help="vLLM reasoning parser.")
     parser.add_argument(
         "--disable-auto-tool-choice",
@@ -46,6 +52,12 @@ def _build_parser() -> argparse.ArgumentParser:
         type=str,
         default="qwen3_coder",
         help="vLLM tool call parser.",
+    )
+    parser.add_argument(
+        "--vllm-startup-timeout",
+        type=int,
+        default=1800,
+        help="Seconds to wait for vLLM to become ready.",
     )
     parser.add_argument("--debug-litellm", action="store_true", help="Enable LiteLLM debug logging.")
     return parser

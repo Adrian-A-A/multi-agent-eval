@@ -65,6 +65,7 @@ def run_benchmark(
     from maseval.benchmark.multiagentbench import (
         MarbleMultiAgentBenchBenchmark,
         configure_model_ids,
+        ensure_marble_exists,
         load_tasks,
     )
     from maseval.interface.inference.openai import OpenAIModelAdapter
@@ -85,6 +86,8 @@ def run_benchmark(
                 self.register("models", kwargs["register_name"], adapter)
             return adapter
 
+    # Ensure MARBLE sources are available before loading tasks.
+    ensure_marble_exists()
     tasks = load_tasks(scenario, limit=task_limit)
     for task in tasks:
         task.environment_data["coordinate_mode"] = coordinate_mode

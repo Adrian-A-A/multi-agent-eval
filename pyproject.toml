@@ -7,4 +7,5 @@ requires-python = ">=3.12"
 dependencies = [
     "maseval[multiagentbench]>=0.4.0",
     "vllm>=0.18.1",
+    "litellm>=1.0.0",
 ]

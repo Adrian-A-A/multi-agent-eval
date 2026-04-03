@@ -1,5 +1,0 @@
-[2026-04-02 09:09:25,058] [INFO] [progress]: Benchmark run started
-[2026-04-02 09:09:25,058] [INFO] [progress]: Run directory: logs/benchmark_20260402_090925_053013
-[2026-04-02 09:09:25,058] [INFO] [progress]: Verbose log: logs/benchmark_20260402_090925_053013/verbose.log
-[2026-04-02 09:09:25,058] [INFO] [progress]: Evaluation log: logs/benchmark_20260402_090925_053013/evaluation.json
-[2026-04-02 09:09:25,069] [INFO] [progress]: Stopping vLLM server for model: Qwen/Qwen3.5-0.8B

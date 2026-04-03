@@ -9,8 +9,8 @@ import shutil
 import subprocess
 import time
 import sys
-from dataclasses import dataclass, field
 from datetime import datetime
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 from urllib import error, request
@@ -30,10 +30,12 @@ VALID_SCENARIOS = {"coding", "database", "research", "bargaining", "minecraft", 
 class VllmConfig:
     model: str
     port: int = 8000
-    max_model_len: int | None = 262144
+    max_model_len: int | None = 32768
     reasoning_parser: str | None = "qwen3"
     enable_auto_tool_choice: bool = True
     tool_call_parser: str | None = "qwen3_coder"
+    gpu_memory_utilization: float = 0.95
+    startup_timeout_seconds: int = 1800
     extra_args: list[str] = field(default_factory=list)
 
 
@@ -66,8 +68,21 @@ class VllmServer:
     def __init__(self, config: VllmConfig):
         self.config = config
         self.process: subprocess.Popen[str] | None = None
+        self.log_path: Path | None = None
+        self._log_file_handle = None
 
-    def start(self) -> None:
+    def _read_log_tail(self, max_lines: int = 80) -> str:
+        if not self.log_path or not self.log_path.exists():
+            return ""
+        try:
+            lines = self.log_path.read_text(encoding="utf-8", errors="replace").splitlines()
+        except OSError:
+            return ""
+        if not lines:
+            return ""
+        return "\n".join(lines[-max_lines:])
+
+    def start(self, log_dir: str | Path) -> None:
         vllm_executable = shutil.which("vllm")
         if not vllm_executable:
             virtualenv_executable = Path(sys.executable).resolve().with_name("vllm")
@@ -86,12 +101,28 @@ class VllmServer:
             command.append("--enable-auto-tool-choice")
         if self.config.tool_call_parser:
             command.extend(["--tool-call-parser", self.config.tool_call_parser])
-        command.extend(self.config.extra_args)
+        command.extend(["--gpu-memory-utilization", str(self.config.gpu_memory_utilization)])
+
+        effective_extra_args = list(self.config.extra_args)
+        if shutil.which("nvcc") is None:
+            progress_logger = logging.getLogger("progress")
+            if "--enforce-eager" not in effective_extra_args:
+                progress_logger.warning(
+                    "nvcc was not found; adding --enforce-eager to reduce JIT kernel usage."
+                )
+                effective_extra_args.append("--enforce-eager")
+        command.extend(effective_extra_args)
+
+        logs_dir = Path(log_dir)
+        logs_dir.mkdir(parents=True, exist_ok=True)
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
+        self.log_path = logs_dir / f"vllm_{self.config.port}_{timestamp}.log"
+        self._log_file_handle = self.log_path.open("a", encoding="utf-8")
 
         self.process = subprocess.Popen(
             command,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
+            stdout=self._log_file_handle,
+            stderr=subprocess.STDOUT,
             text=True,
             preexec_fn=os.setsid,
         )
@@ -101,13 +132,25 @@ class VllmServer:
         deadline = time.time() + timeout_seconds
         while time.time() < deadline:
             if self.process and self.process.poll() is not None:
-                raise RuntimeError("vLLM process exited before becoming ready.")
+                error_msg = "vLLM process exited before becoming ready.\n"
+                if self.log_path:
+                    error_msg += f"vLLM log file: {self.log_path}\n"
+                tail = self._read_log_tail()
+                if tail:
+                    error_msg += f"Last vLLM log lines:\n{tail}"
+                raise RuntimeError(error_msg)
             try:
                 with request.urlopen(url, timeout=2):
                     return
             except (error.URLError, TimeoutError):
                 time.sleep(1)
-        raise TimeoutError(f"Timed out waiting for vLLM at {url}")
+        message = f"Timed out waiting for vLLM at {url}.\n"
+        if self.log_path:
+            message += f"vLLM log file: {self.log_path}\n"
+        tail = self._read_log_tail()
+        if tail:
+            message += f"Last vLLM log lines:\n{tail}"
+        raise TimeoutError(message)
 
     def stop(self) -> None:
         if not self.process:
@@ -119,6 +162,9 @@ class VllmServer:
             except subprocess.TimeoutExpired:
                 os.killpg(os.getpgid(self.process.pid), signal.SIGKILL)
         self.process = None
+        if self._log_file_handle:
+            self._log_file_handle.close()
+            self._log_file_handle = None
 
 
 def _default_vllm_model_from_model_id(model_id: str) -> str:
@@ -162,10 +208,12 @@ def build_pipeline_config_from_args(args: argparse.Namespace) -> PipelineConfig:
                 vllm=VllmConfig(
                     model=entry.get("vllm", {}).get("model", _default_vllm_model_from_model_id(entry["model_id"])),
                     port=int(entry.get("vllm", {}).get("port", 8000)),
-                    max_model_len=entry.get("vllm", {}).get("max_model_len", 262144),
+                    max_model_len=entry.get("vllm", {}).get("max_model_len", 32768),
                     reasoning_parser=entry.get("vllm", {}).get("reasoning_parser", "qwen3"),
                     enable_auto_tool_choice=bool(entry.get("vllm", {}).get("enable_auto_tool_choice", True)),
                     tool_call_parser=entry.get("vllm", {}).get("tool_call_parser", "qwen3_coder"),
+                    gpu_memory_utilization=float(entry.get("vllm", {}).get("gpu_memory_utilization", 0.95)),
+                    startup_timeout_seconds=int(entry.get("vllm", {}).get("startup_timeout_seconds", 1800)),
                     extra_args=list(entry.get("vllm", {}).get("extra_args", [])),
                 ),
             )
@@ -198,6 +246,8 @@ def build_pipeline_config_from_args(args: argparse.Namespace) -> PipelineConfig:
                     reasoning_parser=args.reasoning_parser,
                     enable_auto_tool_choice=not args.disable_auto_tool_choice,
                     tool_call_parser=args.tool_call_parser,
+                    gpu_memory_utilization=args.gpu_memory_utilization,
+                    startup_timeout_seconds=args.vllm_startup_timeout,
                 ),
             )
         )
@@ -220,24 +270,24 @@ def run_pipeline(config: PipelineConfig) -> dict[str, Any]:
     aggregate_results: list[dict[str, Any]] = []
 
     for model_cfg in config.models:
-        server = VllmServer(model_cfg.vllm)
         progress_logger = logging.getLogger("progress")
-        progress_logger.info("Starting vLLM server for model: %s", model_cfg.model_id)
-        server.start()
-        try:
-            server.wait_until_ready()
-            progress_logger.info("vLLM ready at %s", model_cfg.api_base)
+        os.environ["BENCH_LOCAL_MODEL_ID"] = model_cfg.model_id
+        os.environ["OPENAI_API_BASE"] = model_cfg.api_base
+        os.environ["OPENAI_API_KEY"] = "local-testing"
 
-            os.environ["BENCH_LOCAL_MODEL_ID"] = model_cfg.model_id
-            os.environ["OPENAI_API_BASE"] = model_cfg.api_base
-            os.environ["OPENAI_API_KEY"] = "local-testing"
+        install_litellm_completion_guard(default_model_id=model_cfg.model_id)
+        install_marble_safety_patches(model_cfg.action_model_name)
 
-            install_litellm_completion_guard(default_model_id=model_cfg.model_id)
-            install_marble_safety_patches(model_cfg.action_model_name)
+        for scenario in config.scenarios:
+            for orchestration in config.orchestrations:
+                run_paths = configure_run_logging(Path("logs"))
+                server = VllmServer(model_cfg.vllm)
+                progress_logger.info("Starting vLLM server for model: %s", model_cfg.model_id)
+                server.start(run_paths.run_dir)
+                try:
+                    server.wait_until_ready(timeout_seconds=model_cfg.vllm.startup_timeout_seconds)
+                    progress_logger.info("vLLM ready at %s", model_cfg.api_base)
 
-            for scenario in config.scenarios:
-                for orchestration in config.orchestrations:
-                    run_paths = configure_run_logging(Path("logs"))
                     results = run_benchmark(
                         local_api_base=model_cfg.api_base,
                         local_model_id=model_cfg.model_id,
@@ -263,9 +313,9 @@ def run_pipeline(config: PipelineConfig) -> dict[str, Any]:
                             "results": summary,
                         }
                     )
-        finally:
-            logging.getLogger("progress").info("Stopping vLLM server for model: %s", model_cfg.model_id)
-            server.stop()
+                finally:
+                    progress_logger.info("Stopping vLLM server for model: %s", model_cfg.model_id)
+                    server.stop()
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
     aggregate_path = Path("logs") / f"pipeline_summary_{timestamp}.json"
