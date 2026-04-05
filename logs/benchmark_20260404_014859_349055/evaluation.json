@@ -1,0 +1,54 @@
+{
+  "run_timestamp": "20260404_014859_349055",
+  "run_directory": "logs/benchmark_20260404_014859_349055",
+  "results": [
+    {
+      "task_id": "research_1",
+      "status": "success",
+      "passed": false,
+      "eval": [
+        {
+          "passed": false,
+          "metrics": {
+            "task_completion": false,
+            "token_consumption": 0,
+            "communication_score": null,
+            "communication_scores": [
+              -1,
+              -1,
+              -1
+            ],
+            "planning_scores": [
+              -1,
+              -1,
+              -1
+            ],
+            "task_evaluation": {},
+            "agent_kpis": {},
+            "total_milestones": 0,
+            "code_quality": {}
+          },
+          "marble_raw_metrics": {
+            "task_completion": [],
+            "token_consumption": [],
+            "planning_score": [
+              -1,
+              -1,
+              -1
+            ],
+            "communication_score": [
+              -1,
+              -1,
+              -1
+            ],
+            "task_evaluation": {},
+            "total_milestones": 0,
+            "agent_kpis": {},
+            "code_quality": {}
+          },
+          "domain": "research"
+        }
+      ]
+    }
+  ]
+}

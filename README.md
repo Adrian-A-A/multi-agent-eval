@@ -30,9 +30,9 @@ Use `--pipeline-config` for per-model vLLM settings.
 {
 	"models": [
 		{
-			"model_id": "openai/Qwen/Qwen3.5-27B",
+			"model_id": "openai/Qwen/Qwen3.5-9B",
 			"vllm": {
-				"model": "Qwen/Qwen3.5-27B",
+				"model": "Qwen/Qwen3.5-9B",
 				"port": 8000,
 				"max_model_len": 32768,
 				"reasoning_parser": "qwen3",
@@ -40,11 +40,11 @@ Use `--pipeline-config` for per-model vLLM settings.
 				"tool_call_parser": "qwen3_coder",
 				"gpu_memory_utilization": 0.95,
 				"startup_timeout_seconds": 1800,
-				"extra_args": []
+				"extra_args": ["--gdn-prefill-backend", "triton"]
 			}
 		}
 	],
-	"scenarios": ["coding", "database"],
+	"scenarios": ["research"],
 	"orchestrations": ["graph", "star"],
 	"task_limit": 1,
 	"debug_litellm": false
@@ -54,7 +54,7 @@ Use `--pipeline-config` for per-model vLLM settings.
 Run with:
 
 ```bash
-python main.py --pipeline-config pipeline.json
+uv run python main.py --pipeline-config pipeline.json
 ```
 
 ### Outputs

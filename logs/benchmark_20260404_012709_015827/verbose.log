@@ -1,0 +1,7 @@
+[2026-04-04 01:27:09,018] [INFO] [progress]: Benchmark run started
+[2026-04-04 01:27:09,018] [INFO] [progress]: Run directory: logs/benchmark_20260404_012709_015827
+[2026-04-04 01:27:09,019] [INFO] [progress]: Verbose log: logs/benchmark_20260404_012709_015827/verbose.log
+[2026-04-04 01:27:09,019] [INFO] [progress]: Evaluation log: logs/benchmark_20260404_012709_015827/evaluation.json
+[2026-04-04 01:27:09,019] [INFO] [progress]: Starting vLLM server for model: openai/Qwen/Qwen3.5-4B
+[2026-04-04 01:27:09,020] [WARNING] [progress]: nvcc was not found; adding --enforce-eager to reduce JIT kernel usage.
+[2026-04-04 01:27:56,106] [INFO] [progress]: Stopping vLLM server for model: openai/Qwen/Qwen3.5-4B

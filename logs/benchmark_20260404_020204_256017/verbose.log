@@ -1,0 +1,59 @@
+[2026-04-04 02:02:04,264] [INFO] [progress]: Benchmark run started
+[2026-04-04 02:02:04,264] [INFO] [progress]: Run directory: logs/benchmark_20260404_020204_256017
+[2026-04-04 02:02:04,264] [INFO] [progress]: Verbose log: logs/benchmark_20260404_020204_256017/verbose.log
+[2026-04-04 02:02:04,264] [INFO] [progress]: Evaluation log: logs/benchmark_20260404_020204_256017/evaluation.json
+[2026-04-04 02:02:04,265] [INFO] [progress]: Starting vLLM server for model: openai/Qwen/Qwen3.5-4B
+[2026-04-04 02:02:04,265] [WARNING] [progress]: nvcc was not found; adding --enforce-eager to reduce JIT kernel usage.
+[2026-04-04 02:03:07,353] [INFO] [progress]: vLLM ready at http://127.0.0.1:8000/v1
+[2026-04-04 02:03:07,355] [INFO] [progress]: Task setup complete
+[2026-04-04 02:03:07,355] [INFO] [progress]: Model configured: openai/Qwen/Qwen3.5-4B
+[2026-04-04 02:03:07,355] [INFO] [progress]: Scenario configured: research
+[2026-04-04 02:03:07,355] [INFO] [progress]: Orchestration configured: star
+[2026-04-04 02:03:07,474] [INFO] [progress]: Orchestration started
+Running MyMarbleBenchmark:   0%|          | 0/1 [00:00<?, ?task/s][2026-04-04 02:03:07,476] [INFO] [BaseAgent]: Agent 'agent1' initialized.
+[2026-04-04 02:03:07,476] [INFO] [BaseAgent]: Agent 'agent2' initialized.
+[2026-04-04 02:03:07,476] [INFO] [BaseAgent]: Agent 'agent3' initialized.
+[2026-04-04 02:03:07,476] [INFO] [BaseAgent]: Agent 'agent4' initialized.
+[2026-04-04 02:03:07,476] [INFO] [BaseAgent]: Agent 'agent5' initialized.
+[2026-04-04 02:03:07,476] [INFO] [AgentGraph]: AgentGraph initialized with execution mode 'star'.
+[2026-04-04 02:03:07,476] [INFO] [AgentGraph]: Relationship added: agent1 --[collaborate with]--> agent2
+[2026-04-04 02:03:07,476] [INFO] [AgentGraph]: Relationship added: agent1 --[collaborate with]--> agent3
+[2026-04-04 02:03:07,477] [INFO] [AgentGraph]: Relationship added: agent1 --[collaborate with]--> agent4
+[2026-04-04 02:03:07,477] [INFO] [AgentGraph]: Relationship added: agent1 --[collaborate with]--> agent5
+[2026-04-04 02:03:07,477] [INFO] [AgentGraph]: Relationship added: agent2 --[collaborate with]--> agent3
+[2026-04-04 02:03:07,477] [INFO] [AgentGraph]: Relationship added: agent2 --[collaborate with]--> agent4
+[2026-04-04 02:03:07,477] [INFO] [AgentGraph]: Relationship added: agent2 --[collaborate with]--> agent5
+[2026-04-04 02:03:07,477] [INFO] [AgentGraph]: Relationship added: agent3 --[collaborate with]--> agent4
+[2026-04-04 02:03:07,477] [INFO] [AgentGraph]: Relationship added: agent3 --[collaborate with]--> agent5
+[2026-04-04 02:03:07,477] [INFO] [AgentGraph]: Relationship added: agent4 --[collaborate with]--> agent5
+[2026-04-04 02:03:07,477] [INFO] [EnginePlanner]: EnginePlanner initialized.
+[2026-04-04 02:04:13,910] [DEBUG] [EnginePlanner]: Received task assignment using naive planning: {'continue': True}
+[2026-04-04 02:06:25,399] [DEBUG] [EnginePlanner]: Updated progress: Starting the collaborative research idea generation based on the provided Introduction.
+Agents' Results Summary:
+
+[2026-04-04 02:06:36,437] [WARNING] [_Patched]: No valid score found, using default score (3)
+[2026-04-04 02:06:47,348] [ERROR] [_Patched]: Failed to parse JSON from assistant's answer.
+[2026-04-04 02:06:47,348] [DEBUG] [_Patched]: LLM Response: 
+[2026-04-04 02:07:03,790] [DEBUG] [EnginePlanner]: Received continuation decision: {'continue': True}
+[2026-04-04 02:08:09,962] [DEBUG] [EnginePlanner]: Received task assignment using naive planning: {'continue': True}
+[2026-04-04 02:10:21,623] [DEBUG] [EnginePlanner]: Updated progress: Starting the collaborative research idea generation based on the provided Introduction.
+Agents' Results Summary:
+
+Agents' Results Summary:
+
+[2026-04-04 02:10:32,291] [WARNING] [_Patched]: No valid score found, using default score (3)
+[2026-04-04 02:10:43,232] [ERROR] [_Patched]: Failed to parse JSON from assistant's answer.
+[2026-04-04 02:10:43,233] [DEBUG] [_Patched]: LLM Response: 
+[2026-04-04 02:10:46,890] [DEBUG] [EnginePlanner]: Received continuation decision: {'continue': True}
+[2026-04-04 02:11:52,600] [DEBUG] [EnginePlanner]: Received task assignment using naive planning: {'continue': True}
+[2026-04-04 02:14:04,007] [DEBUG] [EnginePlanner]: Updated progress: Starting the collaborative research idea generation based on the provided Introduction.
+Agents' Results Summary:
+
+Agents' Results Summary:
+
+Agents' Results Summary:
+
+[2026-04-04 02:14:14,922] [WARNING] [_Patched]: No valid score found, using default score (3)
+[2026-04-04 02:14:25,801] [ERROR] [_Patched]: Failed to parse JSON from assistant's answer.
+[2026-04-04 02:14:25,802] [DEBUG] [_Patched]: LLM Response: 
+[2026-04-04 02:14:29,797] [DEBUG] [EnginePlanner]: Received continuation decision: {'continue': True}

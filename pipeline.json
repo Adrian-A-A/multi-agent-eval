@@ -1,0 +1,21 @@
+{
+  "models": [
+    {
+      "model_id": "openai/Qwen/Qwen3.5-4B",
+      "vllm": {
+        "model": "Qwen/Qwen3.5-4B",
+        "port": 8000,
+        "max_model_len": 32768,
+        "reasoning_parser": "qwen3",
+        "enable_auto_tool_choice": true,
+        "tool_call_parser": "qwen3_coder",
+        "gpu_memory_utilization": 0.95,
+        "startup_timeout_seconds": 1800,
+        "extra_args": ["--gdn-prefill-backend", "triton"]
+      }
+    }
+  ],
+  "scenarios": ["research"],
+  "orchestrations": ["graph", "star"],
+  "task_limit": 1
+}
